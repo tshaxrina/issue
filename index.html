@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sh sayt</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+    <header>
+        <div class="left">
+            <h1>Dashboard</h1>
+        <button class="add">Добавить задачу</button>
+        </div>
+        <div class="right">
+            <input class="search" type="text" placeholder="Поиск по задачам">
+        </div>
+    </header>
+    <section>
+        <p>Показать задачи как: <span class="table" class="blue">Таблица</span> <span class="cell">Плитка</span> </p>
+    </section>
+    <div class="main">
+        <table class="t"></table>
+    </div>
+    <div class="modal_add">
+        <div class="modal_dialog">
+            <h1>Добавить</h1>
+            <button class="close">X</button>
+        <form>
+        <input class="inp_title" type="text" placeholder="Заголовок">
+        <input class="inp_descr" type="text" placeholder="Описание">
+        <input class="time1" type="time" placeholder="Время (часы)">
+        <input class="time2" type="date" placeholder="Время (дата)">
+        <input class="inp_done" type="text" placeholder="Тип задачи (готово/в процессе/не выполнен)">
+        <button class="add_button">Добавить</button>
+    </form>
+        
+        
+        </div>
+        
+    </div>
+    <script src="./JS/script.js"></script>
+</body>
+</html>

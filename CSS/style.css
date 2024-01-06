@@ -1,0 +1,137 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.add {
+    height: 35px;
+    width: 125px;
+    border-radius: 8%;
+    background-color: blue;
+    color: white;
+    border-width: 0px;
+}
+header {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+}
+.left {
+    display: flex;
+    gap: 40px;
+}
+.search {
+    height: 35px;
+    width: 125px;
+    border-radius: 8%;
+    border-width: 1px;
+    border-color: blue;
+    padding: 5px;
+}
+section {
+    padding: 20px;
+}
+span {
+    color: gray;
+}
+.blue {
+    color: blue;
+}
+.block {
+    width: 350px;
+    height: 250px;
+    border-radius: 10px;
+    border: 1px solid #007FFF;
+    background: #F0F0F0;
+    padding: 15px;
+}
+.descr_block {
+    color: gray;
+    padding: 5px 0px;
+}
+.time {
+    display: flex;
+    gap: 25px;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+.plitka {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    gap: 25px;
+}
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    background: white;
+    max-width: 100%;
+    width: 90%;
+    border-collapse: collapse;
+    text-align: left;
+}
+th {
+    font-weight: normal;
+    border-bottom: 2px solid #232427;
+    padding: 10px 8px;
+  }
+td {
+    padding: 9px 8px;
+    transition: .3s linear;
+    border-bottom: 2px solid #343435;
+  }
+.modal_add {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        display: none;
+}
+.modal_dialog {
+    font-family: gilroy;
+    width: 500px;
+    height: fit-content;
+    padding: 50px;
+    border-radius: 14px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+.modal_dialog input {
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    border-width: 0.5px;
+    padding: 10px;
+}
+.add_button {
+    width: 100%;
+    height: 45px;
+    background-color: blue;
+    color: white;
+    border-width: 0px;
+    border-radius: 8px;
+}
+.show {
+    display: flex;
+}
+.close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 55px;
+    background-color: white;
+    border-radius: 1px;
+}
+
