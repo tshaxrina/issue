@@ -55,7 +55,7 @@ span {
     padding-top: 5px;
     padding-bottom: 15px;
 }
-.plitka {
+.container {
     margin: 20px;
     width: 100%;
     display: flex;
@@ -114,6 +114,15 @@ td {
     border-radius: 8px;
     border-width: 0.5px;
     padding: 10px;
+    margin: 5px;
+}
+select {
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    border-width: 0.5px;
+    padding: 10px;
+    margin: 5px;
 }
 .add_button {
     width: 100%;
@@ -122,9 +131,10 @@ td {
     color: white;
     border-width: 0px;
     border-radius: 8px;
+    margin: 5px;
 }
-.show {
-    display: flex;
+.hide {
+    display: none;
 }
 .close {
     width: 30px;
@@ -134,4 +144,9 @@ td {
     background-color: white;
     border-radius: 1px;
 }
-
+.show {
+    display: flex;
+}
+.types button {
+    user-select: none;
+}

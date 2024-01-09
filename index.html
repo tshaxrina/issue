@@ -16,22 +16,40 @@
             <input class="search" type="text" placeholder="Поиск по задачам">
         </div>
     </header>
-    <section>
-        <p>Показать задачи как: <span class="table" class="blue">Таблица</span> <span class="cell">Плитка</span> </p>
-    </section>
-    <div class="main">
-        <table class="t"></table>
+    <div class="types"><p>Показать задачи как: <button data-type="table">Таблица</button> <button data-type="container">Плитка</button>
     </div>
+    
+    <div class="container" data-type="container"></div>
+    <div class="tablisa" data-type="table">
+        <table class="t">
+            <thead>
+                <tr>
+                    <th>Заголовок задачи</th>
+                    <th> Описание задачи</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Выполнено</th>
+                </tr>
+            </thead>
+            <tbody class="tbody"></tbody> 
+        </table>
+    </div>
+    
+
     <div class="modal_add">
         <div class="modal_dialog">
             <h1>Добавить</h1>
             <button class="close">X</button>
-        <form>
+        <form class="change">
         <input class="inp_title" type="text" placeholder="Заголовок">
         <input class="inp_descr" type="text" placeholder="Описание">
         <input class="time1" type="time" placeholder="Время (часы)">
         <input class="time2" type="date" placeholder="Время (дата)">
-        <input class="inp_done" type="text" placeholder="Тип задачи (готово/в процессе/не выполнен)">
+        <select name="" id="">
+            <option value="Готово">Готово</option>
+            <option value="Не выполнен">Не выполнен</option>
+            <option value="В процессе">В процессе</option>
+        </select>
         <button class="add_button">Добавить</button>
     </form>
         

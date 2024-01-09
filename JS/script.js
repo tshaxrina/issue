@@ -39,125 +39,37 @@ let issues = [{
     "time": "11:23",
     "done": "Готово"
 } ]
+const places = {
+    table: document.querySelector('tbody'),
+    container: document.querySelector('.container')
+}
+const typesBtn = document.querySelectorAll('.types button')
 let main = document.querySelector('.main')
-let table = document.querySelector('.table')
-let cell = document.querySelector('.cell')
-let title = document.createElement('p')
-let descr = document.createElement('p')
-let date = document.createElement('p')
-let time = document.createElement('p')
-let done = document.createElement('p')
+// let title = document.createElement('p')
+// let descr = document.createElement('p')
+// let date = document.createElement('p')
+// let time = document.createElement('p')
+// let done = document.createElement('p')
 let inp_search = document.querySelector('.search')
-let t = document.querySelector('.t')
+// let t = document.querySelector('.tbody')
+// let c = document.querySelector('.container')
 let add = document.querySelector('.add')
 let modal_add = document.querySelector('.modal_add')
 let btn_close = document.querySelector('.close')
 let form = document.querySelector('form')
 
-add.onclick = () => {
-    modal_add.classList.add('show')
-}
-btn_close.onclick = () => {
-    modal_add.classList.remove('show')
-}
 
-table.onclick = () => {
-    table.classList.add('blue')
-    cell.classList.remove('blue')
-    if (table.classList.contains('blue')) {
-        reload_table(issues)
-    } else {
-        reload(issues)
-    }
-}
-cell.onclick = () => {
-    cell.classList.add('blue')
-    table.classList.remove('blue')
-    if(cell.classList.contains('blue')) {
-        reload(issues)
-    } else {
-        reload_table(issues)
-    }
-}
+reload(issues, places['table'], 'table')
 
-let inp_title = document.querySelector('.inp_title')
-let inp_descr = document.querySelector('.inp_descr')
-let inp_done = document.querySelector('.inp_done')
-let time1 = document.querySelector('.time1') 
-let time2 = document.querySelector('.time2')
-
-form.onsubmit = (e) => {
-    e.preventDefault();
-
-    let issue = {
-        title: inp_title.value,
-        done: inp_done.value,
-        time: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds(),
-        description: inp_descr.value
-    }
-
-
-    issues.push(issue)
-
-    reload(issues)
-    reload_table(issues)
-}
-
-function reload(arr) {
-    main.innerHTML = ""
-
-    for (let item of arr) {
-        let block = document.createElement('div')
-        let title_block = document.createElement('h1')
-        let descr_block = document.createElement('p')
-        let time_div = document.createElement('div')
-        let date_block = document.createElement('p')
-        let time_block = document.createElement('p')
-        let done_block = document.createElement('p')
-
-        block.classList.add('block')
-        descr_block.classList.add('descr_block')
-        time_div.classList.add('time')
-        main.classList.add ('plitka')
-
-        title_block.innerHTML = item.title
-        descr_block.innerHTML = item.description
-        date_block.innerHTML = item.date
-        time_block.innerHTML = item.time
-        done_block.innerHTML = item.done
-
-        block.append(title_block, descr_block, time_div, done_block)
-        time_div.append(date_block, time_block)
-        main.append(block)
-        if (item.done === "В прогрессе") {
-            done_block.style.color = "blue"
-        } else if (item.done === "Не выполнено") {
-            done_block.style.color = "red"
-        } else {
-            done_block.style.color = "black"
-        }
-
-        // block.ondblclick = () => {
-        //     modal_add.classList.add('show')
-        //     // title_block.innerHTML = `Title: ${todo.title}`
-        //     modal_inp.setAttribute('placeholder', `change: ${todo.title}`)
-
-        //     modal_form.onsubmit = (e) => {
-        //         e.preventDefault()
-
-        //         todo.title = modal_inp.value
-        //         todo.time = new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
-
-        //         title_text.innerHTML = todo.title
-
-        //         modal_form.reset()
-        //         modal.classList.remove('show')
-        //     }
-            
-        // }
+typesBtn.forEach(btn => {
+    btn.onclick = () => {
+        let type = btn.dataset.type
+        
+        reload(issues, places[type], type)
+        
     }
     
-}
+})
 
 inp_search.onkeyup = (event) => {
     const keyword = event.target.value.toUpperCase().trim()
@@ -168,54 +80,184 @@ inp_search.onkeyup = (event) => {
             return item
         }
     })
-    reload(filtered, main)
+    
+    reload(filtered, places[i])
 }
 
-function reload_table(array) {
-    t.innerHTML = ""
-    let thead = document.createElement('thead')
-    let tr_thead = document.createElement('tr')
-    let title_table = document.createElement('th')
-    let description_table = document.createElement('th')
-    let date_table = document.createElement('th')
-    let time_table = document.createElement('th')
-    let done_table = document.createElement('th')
-
-    title_table.innerHTML = "Заголовок задачи"
-    description_table.innerHTML = "Описание задачи"
-    date_table.innerHTML = "Дата"
-    time_table.innerHTML = "Время"
-    done_table.innerHTML = "Выполнено"
-
-    t.append(thead)
-    thead.append(tr_thead)
-    tr_thead.append(title_table, description_table, date_table, time_table, done_table)
-
-    for (let i of array) {
-    let tdody = document.createElement('tbody')
-    let tr_tbody = document.createElement('tr')
-    let titletable = document.createElement('td')
-    let descriptiontable = document.createElement('td')
-    let datetable = document.createElement('td')
-    let timetable = document.createElement('td')
-    let donetable = document.createElement('td')
-
-    titletable.innerHTML = i.title
-    descriptiontable.innerHTML = i.description
-    datetable.innerHTML = i.date
-    timetable.innerHTML = i.time
-    donetable.innerHTML = i.done
-
-    tdody.append(tr_tbody)
-    tr_tbody.append(titletable, descriptiontable, datetable, timetable, donetable)
-    t.append(tdody)
-
-    if (i.done === "В прогрессе") {
-        donetable.style.color = "blue"
-    } else if (i.done === "Не выполнено") {
-        donetable.style.color = "red"
-    } else {
-        donetable.style.color = "black"
-    }
-    }
+add.onclick = () => {
+    modal_add.classList.add('show')
 }
+btn_close.onclick = () => {
+    modal_add.classList.remove('show')
+}
+
+let inp_title = document.querySelector('.inp_title')
+let inp_descr = document.querySelector('.inp_descr')
+let inp_done = document.querySelector('select')
+let time1 = document.querySelector('.time1') 
+let time2 = document.querySelector('.time2')
+form.onsubmit = (e) => {
+    e.preventDefault();
+
+    let issue = {
+        title: inp_title.value,
+        done: inp_done.value,
+        time: time1.value.value,
+        date: time2,
+        description: inp_descr.value
+    }
+
+
+    issues.push(issue)
+    reload(issues, places, type)
+}
+
+
+function reload(arr, place, type) {
+    place.innerHTML = ""
+
+    if(type === "container") {
+        places['table'].parentElement.classList.add('hide')
+        places['container'].classList.remove('hide')
+
+        for (let item of arr) {
+            let block = document.createElement('div')
+            let title_block = document.createElement('h1')
+            let descr_block = document.createElement('p')
+            let time_div = document.createElement('div')
+            let date_block = document.createElement('p')
+            let time_block = document.createElement('p')
+            let done_block = document.createElement('p')
+    
+            block.classList.add('block')
+            descr_block.classList.add('descr_block')
+            time_div.classList.add('time')
+
+    
+            title_block.innerHTML = item.title
+            descr_block.innerHTML = item.description
+            date_block.innerHTML = item.date
+            time_block.innerHTML = item.time
+            done_block.innerHTML = item.done
+    
+            block.append(title_block, descr_block, time_div, done_block)
+            time_div.append(date_block, time_block)
+            place.append(block)
+            if (item.done === "В прогрессе") {
+                done_block.style.color = "blue"
+            } else if (item.done === "Не выполнено") {
+                done_block.style.color = "red"
+            } else {
+                done_block.style.color = "black"
+            }
+            block.onclick = () => {
+                modal_add.classList.add('show')
+                inp_title.setAttribute('placeholder', `change: ${item.title}`)
+                inp_descr.setAttribute('placeholder', `change: ${item.description}`)
+                time1.setAttribute('placeholder', `change: ${item.time}`)
+                time2.setAttribute('placeholder', `change: ${item.date}`)
+                inp_done.setAttribute('placeholder', `change: ${item.done}`)
+            
+                form.onsubmit = (e) => {
+                    e.preventDefault()
+            
+                    item.title = inp_title.value
+                    item.time = time1.value
+                    item.date = time2.value
+                    item.done = inp_done.value
+                    item.description = inp_descr.value
+            
+                    title_block.innerHTML = item.title
+                    descr_block.innerHTML = item.description
+                    date_block.innerHTML = item.date
+                    time_block.innerHTML = item.time
+                    done_block.innerHTML = item.done
+            
+                    form.reset()
+                    modal_add.classList.remove('show')
+                } }  
+        }  
+        return
+    }
+
+    places['table'].parentElement.classList.remove('hide')
+    places['container'].classList.add('hide')
+
+    
+    for (let item of arr) {
+
+        let tr_tbody = document.createElement('tr')
+        let titletable = document.createElement('td')
+        let descriptiontable = document.createElement('td')
+        let datetable = document.createElement('td')
+        let timetable = document.createElement('td')
+        let donetable = document.createElement('td')
+    
+        titletable.innerHTML = item.title
+        descriptiontable.innerHTML = item.description
+        datetable.innerHTML = item.date
+        timetable.innerHTML = item.time
+        donetable.innerHTML = item.done
+    
+        place.append(tr_tbody)
+        tr_tbody.append(titletable, descriptiontable, datetable, timetable, donetable)
+        
+    
+        if (item.done === "В прогрессе") {
+            donetable.style.color = "blue"
+        } else if (item.done === "Не выполнено") {
+            donetable.style.color = "red"
+        } else {
+            donetable.style.color = "black"
+        }
+        tr_tbody.onclick = () => {
+            modal_add.classList.add('show')
+            inp_title.setAttribute('placeholder', `change: ${item.title}`)
+            inp_descr.setAttribute('placeholder', `change: ${item.description}`)
+            time1.setAttribute('placeholder', `change: ${item.time}`)
+            time2.setAttribute('placeholder', `change: ${item.date}`)
+            inp_done.setAttribute('placeholder', `change: ${item.done}`)
+        
+            form.onsubmit = (e) => {
+                e.preventDefault()
+        
+                item.title = inp_title.value
+                item.time = time1.value
+                item.date = time2.value
+                item.done = inp_done.value
+                item.description = inp_descr.value
+        
+                titletable.innerHTML = item.title
+                descriptiontable.innerHTML = item.description
+                datetable.innerHTML = item.date
+                timetable.innerHTML = item.time
+                donetable.innerHTML = item.done
+        
+                form.reset()
+                modal_add.classList.remove('show')
+            } }  
+        }
+}
+
+// block.onclick = () => {
+//     modal_add.classList.add('show')
+//     inp_title.setAttribute('placeholder', `change: ${item.title}`)
+
+//     modal_form.onsubmit = (e) => {
+//         e.preventDefault()
+
+//         item.title = inp_title.value
+//         item.time = time1
+//         item.date = time2
+//         item.done = inp_done
+//         item.description = inp_descr
+
+//         title_block.innerHTML = item.title
+//         descr_block.innerHTML = item.description
+//         date_block.innerHTML = item.date
+//         time_block.innerHTML = item.time
+//         done_block.innerHTML = item.done
+
+//         modal_form.reset()
+//         modal.classList.remove('show')
+//     } }
